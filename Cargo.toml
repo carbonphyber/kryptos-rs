@@ -1,0 +1,7 @@
+[package]
+name = "kryptos-rs"
+version = "0.0.1"
+authors = ["David Wortham <djwortham@gmail.com>"]
+
+[dependencies]
+clap = "2"
