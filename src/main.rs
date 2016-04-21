@@ -133,19 +133,28 @@ impl Vigenere {
         }
 
         for i in 0..input_bytes.len() {
-            let this_char = input_bytes[i];
-            let input_index = v_int[(this_char as u8 - ASCII_A) as usize];
+            let this_input_char = input_bytes[i];
+            let mut this_output_char: &str = &String::new();
             let this_alphabet = &alphabets[i % key_len];
-
             if is_encoding {
-                output.push_str(&this_alphabet[input_index as usize..(input_index + 1) as usize]);
+                let input_index = v_int[(this_input_char as u8 - ASCII_A) as usize];
+                this_output_char = &this_alphabet[input_index as usize..(input_index + 1) as usize];
+            } else {
+                let this_mapping = &mappings[i % key_len];
+                let input_index = this_mapping[(this_input_char as u8 - ASCII_A) as usize];
+                this_output_char = &self.alphabet[input_index as usize..(input_index + 1) as usize];
             }
+            output.push_str(this_output_char);
         }
         output
     }
+
+    // convenience encode function
     fn encode (&self, plaintext: &str, key: &str) -> String {
         self.translate(plaintext, key, true)
     }
+
+    // convenience decode function
     fn decode (&self, ciphertext: &str, key: &str) -> String {
         self.translate(ciphertext, key, false)
     }
