@@ -5,3 +5,4 @@ authors = ["David Wortham <djwortham@gmail.com>"]
 
 [dependencies]
 clap = "2"
+cipher-crypt = "^0.16"
